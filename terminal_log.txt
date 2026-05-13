@@ -1,0 +1,19 @@
+﻿**********************
+Windows PowerShell 轉譯開始
+開始時間: 20260513214923
+使用者名稱: LAPTOP-F6HB2RKA\USER
+RunAs 使用者: LAPTOP-F6HB2RKA\USER
+設定名稱: 
+電腦: LAPTOP-F6HB2RKA (Microsoft Windows NT 10.0.26200.0)
+主應用程式: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\USER\AppData\Local\Programs\Antigravity\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+處理序識別碼: 13256
+PSVersion: 5.1.26100.8115
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.8115
+BuildVersion: 10.0.26100.8115
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+已啟動轉譯，輸出檔為 .\terminal_log.txt
