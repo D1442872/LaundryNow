@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}LaundryNow - 回報洗衣機狀態{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .form-select, .form-control {
+        border-radius: 10px;
+        padding: 12px 16px;
+        border: 1.5px solid #e2e8f0;
+        transition: all 0.2s ease;
+    }
+    .form-select:focus, .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+    }
+    .btn-submit {
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1.05rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold mb-2">回報洗衣機狀態</h2>
+        <p class="text-secondary">協助填寫您在現場看到的最新狀況，讓住宿同儕共享精確資訊。</p>
+    </div>
+
+    <div class="card p-4 shadow-sm border-0">
+        <form action="/report" method="POST" id="reportForm">
+            <!-- 選擇洗衣機 -->
+            <div class="mb-4">
+                <label for="machine_id" class="form-label fw-bold text-dark mb-2">
+                    <i class="bi bi-water text-primary me-1"></i> 選擇洗衣機設備
+                </label>
+                <select class="form-select" id="machine_id" name="machine_id" required>
+                    <option value="" disabled {% if not preselected_id %}selected{% endif %}>-- 請選擇洗衣機編號 --</option>
+                    {% for machine in machines %}
+                        <option value="{{ machine.id }}" 
+                            {% if preselected_id and preselected_id == machine.id|string %}selected{% endif %}>
+                            {{ machine.machine_number }} ({{ machine.location }} - 目前為：{{ machine.status }})
+                        </option>
+                    {% endfor %}
+                </select>
+                <div class="form-text">若在此找不到編號，代表該設備未登錄。</div>
+            </div>
+
+            <!-- 選擇最新狀態 -->
+            <div class="mb-4">
+                <label for="status" class="form-label fw-bold text-dark mb-2">
+                    <i class="bi bi-activity text-primary me-1"></i> 最新運作狀態
+                </label>
+                <select class="form-select" id="status" name="status" required onchange="toggleTimeInput()">
+                    <option value="" disabled selected>-- 請選擇新狀態 --</option>
+                    <option value="空閒">空閒 (重新設定時間為 0 分鐘)</option>
+                    <option value="使用中">使用中 (可指定剩餘時間)</option>
+                    <option value="故障">故障 (損壞暫停使用，時間設定為 0 分鐘)</option>
+                </select>
+            </div>
+
+            <!-- 剩餘時間 (僅在使用中時顯示) -->
+            <div class="mb-4" id="time_input_group" style="display: none;">
+                <label for="remaining_time" class="form-label fw-bold text-dark mb-2">
+                    <i class="bi bi-hourglass-split text-primary me-1"></i> 預估剩餘時間 (分鐘)
+                </label>
+                <input type="number" class="form-control" id="remaining_time" name="remaining_time" min="0" max="180" value="30" placeholder="請輸入剩餘分鐘數，例如：30">
+                <div class="form-text text-warning">
+                    <i class="bi bi-info-circle-fill"></i> 請根據洗衣機面板上的倒數計時進行估算。
+                </div>
+            </div>
+
+            <!-- 按鈕列 -->
+            <div class="d-grid gap-2 mt-5">
+                <button type="submit" class="btn btn-primary btn-submit text-white">
+                    <i class="bi bi-check2-circle me-1"></i> 送出回報資料
+                </button>
+                <a href="/" class="btn btn-light py-2 rounded-3 text-secondary">
+                    取消並回首頁
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function toggleTimeInput() {
+        const statusSelect = document.getElementById('status');
+        const timeInputGroup = document.getElementById('time_input_group');
+        const remainingTimeInput = document.getElementById('remaining_time');
+
+        if (statusSelect.value === '使用中') {
+            timeInputGroup.style.display = 'block';
+            remainingTimeInput.required = true;
+            if (remainingTimeInput.value === '0' || remainingTimeInput.value === '') {
+                remainingTimeInput.value = '30'; // 給予一個預設值
+            }
+        } else {
+            timeInputGroup.style.display = 'none';
+            remainingTimeInput.required = false;
+        }
+    }
+
+    // 初始化頁面狀態
+    window.onload = function() {
+        toggleTimeInput();
+    };
+</script>
+{% endblock %}
