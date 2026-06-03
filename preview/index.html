@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaundryNow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <p class="tag">Dorm Laundry Status System</p>
+            <h1>LaundryNow</h1>
+            <h2>宿舍洗衣機即時狀態查詢系統</h2>
+            <p class="slogan">先查詢，再洗衣，減少白跑一趟的時間。</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="summary">
+            <div class="summary-card">
+                <strong>目前空閒</strong>
+                <span>2 台</span>
+            </div>
+            <div class="summary-card">
+                <strong>使用中</strong>
+                <span>2 台</span>
+            </div>
+            <div class="summary-card">
+                <strong>故障</strong>
+                <span>1 台</span>
+            </div>
+        </section>
+
+        <section class="toolbar">
+            <h2>洗衣機狀態列表</h2>
+            <button>新增洗衣機</button>
+        </section>
+
+        <section class="machine-grid">
+            <div class="card">
+                <span class="status free">空閒</span>
+                <h3>A01</h3>
+                <p>福星宿舍 1 樓洗衣間</p>
+                <p>剩餘時間：0 分鐘</p>
+                <small>最後更新：2026-05-14 10:00</small>
+                <div class="actions">
+                    <button>更新狀態</button>
+                    <button class="secondary">編輯</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="status busy">使用中</span>
+                <h3>A02</h3>
+                <p>福星宿舍 1 樓洗衣間</p>
+                <p>剩餘時間：25 分鐘</p>
+                <small>最後更新：2026-05-14 10:05</small>
+                <div class="actions">
+                    <button>更新狀態</button>
+                    <button class="secondary">編輯</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="status broken">故障</span>
+                <h3>B01</h3>
+                <p>福星宿舍 2 樓洗衣間</p>
+                <p>剩餘時間：0 分鐘</p>
+                <small>最後更新：2026-05-14 09:50</small>
+                <div class="actions">
+                    <button>更新狀態</button>
+                    <button class="secondary">編輯</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="status free">空閒</span>
+                <h3>B02</h3>
+                <p>福星宿舍 2 樓洗衣間</p>
+                <p>剩餘時間：0 分鐘</p>
+                <small>最後更新：2026-05-14 10:08</small>
+                <div class="actions">
+                    <button>更新狀態</button>
+                    <button class="secondary">編輯</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="status busy">使用中</span>
+                <h3>C01</h3>
+                <p>福星宿舍 3 樓洗衣間</p>
+                <p>剩餘時間：40 分鐘</p>
+                <small>最後更新：2026-05-14 10:12</small>
+                <div class="actions">
+                    <button>更新狀態</button>
+                    <button class="secondary">編輯</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
