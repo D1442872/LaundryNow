@@ -1,0 +1,100 @@
+﻿{% extends "base.html" %}
+
+{% block title %}LaundryNow｜首頁{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="tag">Dorm Laundry Status System</p>
+    <h1>LaundryNow</h1>
+    <h2>宿舍洗衣機即時狀態查詢系統</h2>
+    <p>先查詢，再洗衣，減少白跑一趟的時間。</p>
+</section>
+
+<section class="container">
+    <section class="summary">
+        <div class="summary-card free-border">
+            <strong>目前空閒</strong>
+            <span>{{ total_free }} 台</span>
+        </div>
+        <div class="summary-card busy-border">
+            <strong>使用中</strong>
+            <span>{{ total_busy }} 台</span>
+        </div>
+        <div class="summary-card broken-border">
+            <strong>故障</strong>
+            <span>{{ total_broken }} 台</span>
+        </div>
+    </section>
+
+    <section class="toolbar">
+        <div>
+            <h2>洗衣機狀態列表</h2>
+            <p>可查看、更新、編輯與刪除洗衣機資料。</p>
+        </div>
+
+        <div class="toolbar-actions">
+            <a href="{{ url_for('add_machine') }}" class="button">新增洗衣機</a>
+            <form action="{{ url_for('reset_demo_data') }}" method="POST" onsubmit="return confirm('確定要重置 Demo 資料嗎？');">
+                <button type="submit" class="button secondary">重置 Demo</button>
+            </form>
+        </div>
+    </section>
+
+    {% if machines %}
+        <section class="machine-grid">
+            {% for machine in machines %}
+                <article class="card">
+                    <div class="card-top">
+                        <span class="status status-{{ machine.status }}">{{ machine.status }}</span>
+                        <span class="machine-id">#{{ machine.id }}</span>
+                    </div>
+
+                    <h3>{{ machine.machine_number }}</h3>
+                    <p class="location">{{ machine.location }}</p>
+
+                    <div class="info-row">
+                        <span>剩餘時間</span>
+                        <strong>{{ machine.remaining_time }} 分鐘</strong>
+                    </div>
+
+                    <small>最後更新：{{ machine.updated_at }}</small>
+
+                    <form action="{{ url_for('update_machine', machine_id=machine.id) }}" method="POST" class="quick-form">
+                        <label>更新狀態</label>
+                        <select name="status" class="status-select">
+                            {% for status in valid_statuses %}
+                                <option value="{{ status }}" {% if machine.status == status %}selected{% endif %}>{{ status }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label>剩餘時間（分鐘）</label>
+                        <input
+                            type="number"
+                            name="remaining_time"
+                            min="0"
+                            value="{{ machine.remaining_time }}"
+                            class="remaining-input"
+                        >
+
+                        <button type="submit" class="button full">更新狀態</button>
+                    </form>
+
+                    <div class="card-actions">
+                        <a href="{{ url_for('edit_machine', machine_id=machine.id) }}" class="button secondary">編輯</a>
+
+                        <form action="{{ url_for('delete_machine', machine_id=machine.id) }}" method="POST" onsubmit="return confirm('確定要刪除這台洗衣機嗎？');">
+                            <button type="submit" class="button danger">刪除</button>
+                        </form>
+                    </div>
+                </article>
+            {% endfor %}
+        </section>
+    {% else %}
+        <section class="empty">
+            <h3>目前沒有洗衣機資料</h3>
+            <p>請先新增洗衣機資料。</p>
+            <a href="{{ url_for('add_machine') }}" class="button">新增洗衣機</a>
+        </section>
+    {% endif %}
+</section>
+{% endblock %}

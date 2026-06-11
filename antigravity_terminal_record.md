@@ -1,53 +1,36 @@
-﻿# Antigravity / GitHub 終端機紀錄
+﻿# LaundryNow 完整期末 Demo 實作紀錄
 
 ## 專案名稱
 
 LaundryNow：宿舍洗衣機即時狀態查詢系統
 
-## GitHub Repository
+## 本次完成目標
 
-https://github.com/D1442872/LaundryNow
+完成 6/18 期末展示前可操作的 Flask + SQLite 網站版本。
 
-## 本次目標
+## 已完成功能
 
-建立整個 LaundryNow 專題計畫的文件與預估畫面，並使用 Antigravity 終端機與 PowerShell Transcript 保存操作紀錄。
-
-## 已完成事項
-
-- 建立 docs 資料夾
-- 建立 preview 資料夾
-- 建立完整專題計畫書 PROJECT_PLAN.md
-- 建立 PRD.md
-- 建立 DB_DESIGN.md
-- 建立 ARCHITECTURE.md
-- 建立 FLOWCHART.md
-- 建立 UI_PLAN.md
-- 建立 WORK_DIVISION.md
-- 建立 RISK_ASSESSMENT.md
-- 建立 SCHEDULE.md
-- 建立 preview/index.html
-- 建立 preview/style.css
-- 建立 preview/script.js
-- 更新 README.md
+- 查看洗衣機狀態
+- 新增洗衣機資料
+- 回報洗衣機狀態
+- 設定剩餘時間
+- 編輯洗衣機資料
+- 刪除洗衣機資料
+- 重置 Demo 資料
+- 使用 SQLite 儲存資料
+- 使用 Flask 路由處理網頁功能
+- 使用 Jinja2 顯示資料
+- 使用 CSS 完成響應式畫面設計
 - 使用 PowerShell Transcript 保存終端機紀錄
-- 使用 Git 指令上傳到 GitHub
 
-## 使用過的重要指令
+## 使用指令
 
 ~~~powershell
 Start-Transcript -Path .\terminal_log.txt -Append
-mkdir docs -Force
-mkdir preview -Force
-git status
+pip install -r requirements.txt
+python app.py
 git add .
-git commit -m "Add complete LaundryNow project plan and preview"
+git commit -m "Add complete Flask SQLite LaundryNow demo"
 git push
 Stop-Transcript
-git add terminal_log.txt antigravity_terminal_record.md
-git commit -m "Add Antigravity terminal records"
-git push
 ~~~
-
-## 備註
-
-本次重點是建立整個專題計畫與設計階段資料，尚未完整實作 Flask + SQLite CRUD 功能。
